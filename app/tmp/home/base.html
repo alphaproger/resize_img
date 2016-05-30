@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Minimal Django File Upload Example</title>
+        <title>App for resizing pictures</title>
     </head>
     <body>
     <!-- List of uploaded documents -->
@@ -19,11 +19,16 @@
         <!-- Upload form. Note enctype attribute! -->
         <form action="{% url 'upload' %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
-            <p>{{ form.non_field_errors }}</p>
-            <p>{{ form.image.label_tag }} {{ form.image.help_text }}</p>
-            <p>
-                {{ form.image.errors }}
-                {{ form.image }}
+
+            {% for field in form %}
+                <div>
+                    {{ field.errors }}
+                    {% if field.help_text %}
+                        <p class="help">{{ field.help_text|safe }}</p>
+                    {% endif %}
+                    {{ field.label_tag }} {{ field }}
+                </div>
+            {% endfor %}
             </p>
             <p><input type="submit" value="Upload" /></p>
         </form>
