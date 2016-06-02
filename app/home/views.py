@@ -12,38 +12,56 @@ from .forms import UploadImageForm
 
 
 def resize_picture(file, width, height=None):
-    path = BASE_DIR + file
-    width = int(width)
+    file = str(file)
+
+    name = file.split('.')[0]
+    extension = file.split('.')[-1]
+    path = BASE_DIR + '/media/' + file
+    md5_hash = hashlib.md5(name)
+
+    # open file
     pct = Image.open(path)
+
+    # set sizes
+    width = int(width)
     if not height:
         height = pct.size[1] * width / pct.size[0]
     else:
         height = int(height)
     size = (width, height)
 
-    md5_hash = hashlib.md5()
-    md5_hash.update(file.split('/')[-1])
-    new_path = '{0}_{1}x{2}.{3}'.format(
-        BASE_DIR + "/".join(file.split('/')[:-1]+[md5_hash.hexdigest()]),
-        width,
-        height,
-        file.split('.')[-1])
+    new_name = '{0}_{1}x{2}.{3}'.format(md5_hash.hexdigest(), width, height, extension)
+
+    # resize image and save
     new_pct = pct.resize(size, Image.LANCZOS)
-    new_pct.save(new_path)
-    return new_pct
+    new_pct.save(BASE_DIR + '/media/' + new_name)
+
+    return new_name, height
 
 
 def resize(request):
     if request.method == 'POST':
         form = UploadImageForm(request.POST, request.FILES)
         if form.is_valid():
-            model = UploadImage(image=request.FILES['image'])
+
+            file_name = request.FILES['image']
+            width = request.POST['width']
+            height = request.POST['height']
+
+            model = UploadImage(image=file_name)
             model.save()
 
-            file_name = model.image.url
-            width = request.POST['width']
-            height = request.POST.get('height')
-            new_url = resize_picture(file_name, width, height)
+            try:
+                # function resizing of picture
+                (new_name, height) = resize_picture(file_name, width, height)
+            except BaseException as r:
+                return HttpResponse('Incorrect height or width.<br><br><b>Traceback: '+str(r))
+            finally:
+                model.delete()
+
+            model = UploadImage(image=new_name, width=width, height=height)
+            model.save()
+
             return HttpResponseRedirect(reverse('home.views.resize'))
     else:
         form = UploadImageForm()
