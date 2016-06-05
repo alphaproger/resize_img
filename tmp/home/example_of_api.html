@@ -1,0 +1,28 @@
+{% extends 'home/base.html' %}
+
+{% block example_of_api %}
+    <div class="container">
+      <div class="row row-offcanvas row-offcanvas-right">
+        <div class="container">
+          <div class="row row-offcanvas row-offcanvas-right">
+            <div class="jumbotron">
+              <div style="font-size: 25px; text-align: center;">
+                /api/resize_img/<SPAN style="color: #b92c28">[URL of picture]</SPAN>/<SPAN style="color: #b92c28">[width]</SPAN>/<SPAN style="color: #b92c28">[height]/</SPAN>
+                <h3>or</h3>
+                /api/resize_img/<SPAN style="color: #b92c28">[URL of picture]</SPAN>/<SPAN style="color: #b92c28">[width]</SPAN>/<SPAN style="color: #b92c28"></SPAN>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-heading">For instance</div>
+            <div class="panel-body">
+              <p><a href="/api/resize_img/http://wallpapers-fenix.eu/full/141204/192527975.jpg/900/">/api/resize_img/http://wallpapers-fenix.eu/full/141204/192527975.jpg/900/</a></p>
+              <p><a href="/api/resize_img/http://riscorp.ru/images/riscorp/kalendar/jan2016/7jan1.jpg/850/600/">/api/resize_img/http://riscorp.ru/images/riscorp/kalendar/jan2016/7jan1.jpg/850/600/</a></p>
+              <p><a href="/api/resize_img/http://www.southparkour.ru/content/upload/article_image_1LGqqX.jpg/590/400/">/api/resize_img/http://www.southparkour.ru/content/upload/article_image_1LGqqX.jpg/590/400/</a></p>
+
+            </div>
+          </div>
+        </div>
+      </div>
+{% endblock %}

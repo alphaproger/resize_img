@@ -2,41 +2,14 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
-from PIL import Image
-import hashlib
 
-from app.settings import BASE_DIR
+from app.scripts.resizefunc import resize_picture
 from .models import UploadImage
 from .forms import UploadImageForm
-# Create your views here.
 
 
-def resize_picture(file, width, height=None):
-    file = str(file)
-
-    name = file.split('.')[0]
-    extension = file.split('.')[-1]
-    path = BASE_DIR + '/media/' + file
-    md5_hash = hashlib.md5(name)
-
-    # open file
-    pct = Image.open(path)
-
-    # set sizes
-    width = int(width)
-    if not height:
-        height = pct.size[1] * width / pct.size[0]
-    else:
-        height = int(height)
-    size = (width, height)
-
-    new_name = '{0}_{1}x{2}.{3}'.format(md5_hash.hexdigest(), width, height, extension)
-
-    # resize image and save
-    new_pct = pct.resize(size, Image.LANCZOS)
-    new_pct.save(BASE_DIR + '/media/' + new_name)
-
-    return new_name, height
+def example_of_api(request):
+    return render_to_response('home/example_of_api.html')
 
 
 def resize(request):
@@ -62,14 +35,14 @@ def resize(request):
             model = UploadImage(image=new_name, width=width, height=height)
             model.save()
 
-            return HttpResponseRedirect(reverse('home.views.resize'))
+            return HttpResponseRedirect(reverse('app.home.views.resize'))
     else:
         form = UploadImageForm()
 
     images = UploadImage.objects.all()
 
     return render_to_response(
-        'home/base.html',
+        'home/index.html',
         {'documents': images, 'form': form},
         context_instance=RequestContext(request)
     )
