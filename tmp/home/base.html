@@ -4,25 +4,39 @@
     <head>
         <meta charset="utf-8">
         <title>Resizer</title>
+        <link rel="shortcut icon" href="{% static 'img/0.ico' %}" type="image/x-icon">
         <!-- CSS -->
         <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" type="text/css" media="all"/>
         <link href="{% static 'css/cover.css' %}" rel="stylesheet" type="text/css"/>
+        <link href="{% static 'css/footer.css' %}" rel="stylesheet" type="text/css"/>
     </head>
     <body>
     <div class="container">
       <div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
         <div class="container">
           <div class="navbar-header">
-              <a class="navbar-brand" href="/example_of_api/">API</a>
+              <a class="navbar-brand" style="font-size: 16px;" href="/">Main</a>
           </div>
-            <ul class="nav navbar-nav navbar-right">
-              <li><a href="/admin/">Admin</a></li>
-            </ul>
-       </div>
+          <ul class="nav navbar-nav">
+            <li><a style="font-size: 16px;" href="/example_of_api/">API</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a style="font-size: 16px;" href="/admin/">Admin</a></li>
+          </ul>
+        </div>
       </div>
     </div>
-    {% block index %}{% endblock %}
-    {% block example_of_api %}{% endblock %}
+    <div class="container">
+      <div class="row row-offcanvas row-offcanvas-right">
+        {% block index %}{% endblock %}
+        {% block example_of_api %}{% endblock %}
+      </div>
+    </div>
+     <div class="footer">
+      <div class="container-foo">
+        <p class="text-muted" style="padding-top:10px; text-align: center">Created by <a href="https://github.com/pm-str/">@PM-STR</a></p>
+      </div>
+    </div>
     <!-- Scripts -->
     <script src="{% static 'jquery/jquery-2.1.4.min.js' %}"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>

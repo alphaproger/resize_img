@@ -1,40 +1,33 @@
 {% extends 'home/base.html' %}
 
 {% block index %}
-<div class="container">
-      <div class="row row-offcanvas row-offcanvas-right">
         <div class="col-lg-6 col-md-6">
           <div class="page-header">
             <p class="lead">Let's go! It is only necessary to fill correctly the fields and wait for server response.</p>
           </div>
-            <form action="{% url 'upload' %}" method="post" enctype="multipart/form-data">
-              {% csrf_token %}
-              {% for field in form %}
-                <div style="padding-bottom: 10px;">
-                  <p class="text-muted">{{ field.errors.as_text }}</p>
-                    {% if field.help_text %}
-                      <p class="text-info">{{ field.help_text|safe }}</p>
-                    {% endif %}
-                  <p>{{ field.label_tag }} {{ field }}</p>
-                </div>
+          <form action="{% url 'upload' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% for field in form %}
+              <div style="padding-bottom: 10px;">
+                <p class="text-muted">{{ field.errors.as_text }}</p>
+                  {% if field.help_text %}
+                    <p class="text-info">{{ field.help_text|safe }}</p>
+                  {% endif %}
+                <p>{{ field.label_tag }} {{ field }}</p>
+              </div>
+            {% endfor %}
+            <p><input class="btn btn-lg btn-primary" type="submit" value="Upload" /></p>
+          </form>
+        </div>
+        <div class="col-lg-6 col-md-6 sidebar-offcanvas" id="sidebar" role="navigation">
+          <div class="list-group">
+            {% if documents %}
+              {% for document in documents %}
+                <a style="color: darkred" href="{{ document.image.url }}" class="list-group-item">{{ document.image.name }}</a>
               {% endfor %}
-              <p><input class="btn btn-lg btn-primary" type="submit" value="Upload" /></p>
-            </form>
-          </div>
-          <div class="col-lg-6 col-md-6 sidebar-offcanvas" id="sidebar" role="navigation">
-            <div class="list-group">
-              {% if documents %}
-                {% for document in documents %}
-                  <a style="color: darkred" href="{{ document.image.url }}" class="list-group-item">{{ document.image.name }}</a>
-                {% endfor %}
-                {% else %}
-                  <p class="list-group-item">No documents.</p>
-                {% endif %}
-            </div>
+              {% else %}
+                <p class="list-group-item">No documents.</p>
+              {% endif %}
           </div>
         </div>
-    </div>
-    <div class="footer" style="padding-top: 65px;">
-        <div class="panel-footer"><p>Created by <a href="https://github.com/pm-str/">@PM-STR</a></p></div>
-    </div>
 {% endblock %}

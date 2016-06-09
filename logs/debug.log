@@ -1,0 +1,20 @@
+WARNING 2016-06-06 17:23:00,167 base Not Found: /api/resize_img_one
+WARNING 2016-06-09 09:05:01,451 base Not Found: /favicon.ico
+ERROR 2016-06-09 12:17:00,100 base Internal Server Error: /api/resize_img/http://riscorp.ru/images/riscorp/kalendar/jan2016/7jan1.jpg/850/600/
+Traceback (most recent call last):
+  File "/home/pmv/my_projects/resize_img/venv/local/lib/python2.7/site-packages/django/core/handlers/base.py", line 149, in get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/pmv/my_projects/resize_img/venv/local/lib/python2.7/site-packages/django/core/handlers/base.py", line 147, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/pmv/my_projects/resize_img/venv/local/lib/python2.7/site-packages/django/views/decorators/csrf.py", line 58, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/home/pmv/my_projects/resize_img/venv/local/lib/python2.7/site-packages/django/views/generic/base.py", line 68, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/home/pmv/my_projects/resize_img/venv/local/lib/python2.7/site-packages/rest_framework/views.py", line 466, in dispatch
+    response = self.handle_exception(exc)
+  File "/home/pmv/my_projects/resize_img/venv/local/lib/python2.7/site-packages/rest_framework/views.py", line 463, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/home/pmv/my_projects/resize_img/app/home/api/views.py", line 28, in get
+    model.image.save(name, File(open(str(io))), save=True)
+IOError: [Errno 2] No such file or directory: '<_io.BytesIO object at 0x7fe4b154e110>'
+WARNING 2016-06-09 17:25:18,754 base Not Found: /favicon.ico
