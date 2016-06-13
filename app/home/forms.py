@@ -15,10 +15,10 @@ class UploadImageForm(ModelForm):
             'class': "btn btn-default"
         }
         self.fields['width'].widget.attrs = {
-            'class': "form-control", "placeholder": "required"
+            'class': "form-control", "placeholder": "required, min = 1"
         }
         self.fields['height'].widget.attrs = {
-            'class': "form-control", "placeholder": "optional"
+            'class': "form-control", "placeholder": "optional, min = 1"
         }
 
     def clean_image(self):

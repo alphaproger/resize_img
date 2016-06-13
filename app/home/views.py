@@ -28,7 +28,9 @@ def resize(request):
                 # function resizing of picture
                 (new_name, height) = resize_picture(file_name, width, height)
             except BaseException as r:
-                return HttpResponse('There have been some problems.<br><br><b>Traceback: '+str(r))
+                return render_to_response('home/problems.html', {
+                    'message': 'There have been some problems. Traceback: '+str(r)
+                })
             finally:
                 model.delete()
 
@@ -41,7 +43,9 @@ def resize(request):
 
     images = UploadImage.objects.all()
     return render_to_response(
-        'home/index.html',
-        {'documents': images, 'form': form},
+        'home/home.html', {
+            'documents': images,
+            'form': form
+        },
         context_instance=RequestContext(request)
     )

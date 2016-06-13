@@ -1,20 +1,35 @@
-WARNING 2016-06-06 17:23:00,167 base Not Found: /api/resize_img_one
-WARNING 2016-06-09 09:05:01,451 base Not Found: /favicon.ico
-ERROR 2016-06-09 12:17:00,100 base Internal Server Error: /api/resize_img/http://riscorp.ru/images/riscorp/kalendar/jan2016/7jan1.jpg/850/600/
+WARNING 2016-06-11 10:41:25,974 base Not Found: /favicon.ico
+ERROR 2016-06-13 06:05:34,913 base Internal Server Error: /
+Traceback (most recent call last):
+  File "/home/pmv/my_projects/resize_img/venv/local/lib/python2.7/site-packages/django/core/handlers/base.py", line 134, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/home/pmv/my_projects/resize_img/venv/local/lib/python2.7/site-packages/django/core/urlresolvers.py", line 376, in resolve
+    sub_match = pattern.resolve(new_path)
+  File "/home/pmv/my_projects/resize_img/venv/local/lib/python2.7/site-packages/django/core/urlresolvers.py", line 376, in resolve
+    sub_match = pattern.resolve(new_path)
+  File "/home/pmv/my_projects/resize_img/venv/local/lib/python2.7/site-packages/django/core/urlresolvers.py", line 248, in resolve
+    return ResolverMatch(self.callback, args, kwargs, self.name)
+  File "/home/pmv/my_projects/resize_img/venv/local/lib/python2.7/site-packages/django/core/urlresolvers.py", line 255, in callback
+    self._callback = get_callable(self._callback_str)
+  File "/home/pmv/my_projects/resize_img/venv/local/lib/python2.7/site-packages/django/utils/lru_cache.py", line 100, in wrapper
+    result = user_function(*args, **kwds)
+  File "/home/pmv/my_projects/resize_img/venv/local/lib/python2.7/site-packages/django/core/urlresolvers.py", line 115, in get_callable
+    mod = import_module(mod_name)
+  File "/usr/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/home/pmv/my_projects/resize_img/app/home/views.py", line 30
+    except BaseException as r:
+         ^
+IndentationError: expected an indented block
+WARNING 2016-06-13 06:05:36,547 base Not Found: /favicon.ico
+ERROR 2016-06-13 06:06:10,612 base Internal Server Error: /
 Traceback (most recent call last):
   File "/home/pmv/my_projects/resize_img/venv/local/lib/python2.7/site-packages/django/core/handlers/base.py", line 149, in get_response
     response = self.process_exception_by_middleware(e, request)
   File "/home/pmv/my_projects/resize_img/venv/local/lib/python2.7/site-packages/django/core/handlers/base.py", line 147, in get_response
     response = wrapped_callback(request, *callback_args, **callback_kwargs)
-  File "/home/pmv/my_projects/resize_img/venv/local/lib/python2.7/site-packages/django/views/decorators/csrf.py", line 58, in wrapped_view
-    return view_func(*args, **kwargs)
-  File "/home/pmv/my_projects/resize_img/venv/local/lib/python2.7/site-packages/django/views/generic/base.py", line 68, in view
-    return self.dispatch(request, *args, **kwargs)
-  File "/home/pmv/my_projects/resize_img/venv/local/lib/python2.7/site-packages/rest_framework/views.py", line 466, in dispatch
-    response = self.handle_exception(exc)
-  File "/home/pmv/my_projects/resize_img/venv/local/lib/python2.7/site-packages/rest_framework/views.py", line 463, in dispatch
-    response = handler(request, *args, **kwargs)
-  File "/home/pmv/my_projects/resize_img/app/home/api/views.py", line 28, in get
-    model.image.save(name, File(open(str(io))), save=True)
-IOError: [Errno 2] No such file or directory: '<_io.BytesIO object at 0x7fe4b154e110>'
-WARNING 2016-06-09 17:25:18,754 base Not Found: /favicon.ico
+  File "/home/pmv/my_projects/resize_img/app/home/views.py", line 27, in resize
+    (new_name, height) = resize_picture(file_name, width, height)
+  File "/home/pmv/my_projects/resize_img/app/scripts/resizefunc.py", line 14, in resize_picture
+    if int(width) <= 0 or (height is not None and int(height) <= 0):
+ValueError: invalid literal for int() with base 10: ''
