@@ -29,7 +29,7 @@ def resize(request):
                 (new_name, height) = resize_picture(file_name, width, height)
             except BaseException as r:
                 return render_to_response('home/problems.html', {
-                    'message': 'There have been some problems. Traceback: '+str(r)
+                    'message': 'There have been some problems. ' + ('Traceback: ' + str(r) if str(r) else '')
                 })
             finally:
                 model.delete()
